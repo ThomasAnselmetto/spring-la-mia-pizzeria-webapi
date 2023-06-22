@@ -1,8 +1,11 @@
 package org.lessons.pizzeria.model;
 
+import jakarta.persistence.Entity;
+
 import java.math.BigDecimal;
 
-
+@Entity
+//@Table()
 public class Pizza {
     private String nome;
     private String descrizione;
