@@ -1,23 +1,31 @@
 package org.lessons.pizzeria.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
 @Entity
-//@Table()
+@Table(name = "pizzas")
 public class Pizza {
+    //    cosa da fare subito chiave primaria
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false)
     private String nome;
     private String descrizione;
     private String fotoUrl;
+    @Column(nullable = false)
     private BigDecimal prezzo;
 
-    public Pizza(String nome, String descrizione, String fotoUrl, BigDecimal prezzo) {
-        this.nome = nome;
-        this.descrizione = descrizione;
-        this.fotoUrl = fotoUrl;
-        this.prezzo = prezzo;
-    }
+//    public Pizza(Integer id, String nome, String descrizione, String fotoUrl, BigDecimal prezzo) {
+//        this.id = id;
+//        this.nome = nome;
+//        this.descrizione = descrizione;
+//        this.fotoUrl = fotoUrl;
+//        this.prezzo = prezzo;
+//    }
 
     //quando si lavora con i DB definire SEMPRE i getter e setter
 
