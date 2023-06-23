@@ -2,32 +2,35 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <th:block th:replace="~{/fragments/resources :: head(pageTitle='Book List')}"></th:block>
+    <th:block th:replace="~{/fragments/resources :: head(pageTitle='Pizzas Menu')}"></th:block>
 
 </head>
 <body>
 <div class="container">
-    <h1>Le nostre pizze</h1>
+    <h1 class="mt-4">Le nostre pizze</h1>
 
-    <table>
+    <table class="mt-3" th:if="${pizzas.size() != 0}">
         <thead>
         <tr>
             <th>Nome</th>
             <th>Descrizione</th>
             <th>Foto</th>
             <th>Prezzo</th>
+            <th>Data Creazione</th>
         </tr>
         </thead>
-        <tbody th:if="${pizzas.size() != 0}">
+        <tbody>
         <tr th:each="pizza : ${pizzas}">
-            <td th:text="${pizza.nome}"></td>
+            <td><a th:href="@{|/pizzas/${pizza.id}|}">[[${pizza.nome}]]</a></td>
             <td th:text="${pizza.descrizione}"></td>
             <td th:text="${pizza.fotoUrl}"></td>
             <td th:text="${pizza.prezzo}"></td>
+            <td th:text="${pizza.getFormattedDate()}"></td>
+
         </tr>
-        <tr th:if="${pizzas.size() == 0 || pizzas == null}">Nessuna Pizza da mostrare</tr>
         </tbody>
     </table>
+    <h3 th:unless="${pizzas.size() != 0}">Nessuna Pizza da mostrare</h3>
 </div>
 </body>
 </html>

@@ -3,6 +3,8 @@ package org.lessons.pizzeria.model;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "pizzas")
@@ -18,14 +20,20 @@ public class Pizza {
     private String fotoUrl;
     @Column(nullable = false)
     private BigDecimal prezzo;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     //costruttore con parametri
-    public Pizza(Integer id, String nome, String descrizione, String fotoUrl, BigDecimal prezzo) {
+
+
+    public Pizza(Integer id, String nome, String descrizione, String fotoUrl, BigDecimal prezzo, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.nome = nome;
         this.descrizione = descrizione;
         this.fotoUrl = fotoUrl;
         this.prezzo = prezzo;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Pizza() {//costruttore vuoto
@@ -72,6 +80,29 @@ public class Pizza {
 
     public void setPrezzo(BigDecimal prezzo) {
         this.prezzo = prezzo;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    // getter custom per il timestamp formattato
+    public String getFormattedDate() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMMM dd 'at' HH:mm");
+        return now.format(formatter);
     }
 }
 

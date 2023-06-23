@@ -5,3 +5,8 @@ background-color:red;
 img{
 max-height:30rem;
 }
+td{
+background-color:lightgray;
+border:1px solid black;
+padding:7px
+}
