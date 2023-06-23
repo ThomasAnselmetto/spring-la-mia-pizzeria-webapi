@@ -29,13 +29,15 @@ public class PizzaController {
 
     //    metodo che puo' ricevere opzionalmente un parametro da query string.
 //            se quel parametro c'e dobbiamo filtrare per quel parametro se quel parametro non c'e' dobbiamo restituire tutte le pizze'
+//    "keyword e' la parola che ritroviamo nella barra di ricerca"
     @GetMapping()
     public String index(@RequestParam(name = "keyword", required = false) String searchString, Model model) {
         List<Pizza> pizzas;
         if (searchString == null || searchString.isBlank()) {
             pizzas = pizzaRepository.findAll();
         } else {
-            pizzas = pizzaRepository.findByNome(searchString);
+//            pizzas = pizzaRepository.findByNome(searchString);
+            pizzas = pizzaRepository.findByNomeContainingIgnoreCase(searchString);
         }
         model.addAttribute("pizzas", pizzas);
         return "/pizzas/index";
@@ -43,8 +45,6 @@ public class PizzaController {
     }
 
     @GetMapping("/{id}")
-
-
     public String detail(Model model, @PathVariable Integer id) {
         Optional<Pizza> pizzaId = pizzaRepository.findById(id);
         if (pizzaId.isPresent()) {
