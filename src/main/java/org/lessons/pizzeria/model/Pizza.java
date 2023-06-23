@@ -19,15 +19,28 @@ public class Pizza {
     @Column(nullable = false)
     private BigDecimal prezzo;
 
-//    public Pizza(Integer id, String nome, String descrizione, String fotoUrl, BigDecimal prezzo) {
-//        this.id = id;
-//        this.nome = nome;
-//        this.descrizione = descrizione;
-//        this.fotoUrl = fotoUrl;
-//        this.prezzo = prezzo;
-//    }
+    //costruttore con parametri
+    public Pizza(Integer id, String nome, String descrizione, String fotoUrl, BigDecimal prezzo) {
+        this.id = id;
+        this.nome = nome;
+        this.descrizione = descrizione;
+        this.fotoUrl = fotoUrl;
+        this.prezzo = prezzo;
+    }
 
-    //quando si lavora con i DB definire SEMPRE i getter e setter
+    public Pizza() {//costruttore vuoto
+    }
+
+//quando si lavora con i DB definire SEMPRE i getter e setter
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
