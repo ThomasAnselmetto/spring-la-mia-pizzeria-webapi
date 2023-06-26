@@ -13,4 +13,6 @@ public interface PizzaRepository extends JpaRepository<Pizza, Integer> {
 
     //    metodo per cercare pizze piu' preciso
     List<Pizza> findByNomeContainingIgnoreCase(String nome);
+//    posso creare un metodo per cercare una pizza per un altro dato
+//Optional<Pizza> findByQualcosaDellePizze(String qdp);
 }

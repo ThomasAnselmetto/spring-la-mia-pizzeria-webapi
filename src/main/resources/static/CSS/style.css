@@ -5,6 +5,10 @@ background-color:#b50e05;
 img{
 max-height:30rem;
 }
+.table-img{
+height:150px;
+width:150px;
+}
 td{
 background-color:lightgray;
 border:1px solid black;

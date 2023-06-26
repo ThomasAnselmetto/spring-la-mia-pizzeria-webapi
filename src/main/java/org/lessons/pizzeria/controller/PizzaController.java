@@ -1,14 +1,13 @@
 package org.lessons.pizzeria.controller;
 
+import jakarta.validation.Valid;
 import org.lessons.pizzeria.model.Pizza;
 import org.lessons.pizzeria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,6 +51,25 @@ public class PizzaController {
             model.addAttribute("pizzaDetail", pizzaShow);
             return "/pizzas/show";
         } else {
+            return "redirect:/pizzas";
+        }
+    }
+
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("pizza", new Pizza());
+        return "/pizzas/create"; //view di riferimento
+    }
+
+    @PostMapping("/create")
+    public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+//        i dati della pizza sono dentro all'oggetto' formPizza
+//        verifico se in validazione ci sono stati errrori
+        if (bindingResult.hasErrors()) {
+//            se ci sono errori
+            return "/pizzas/create";
+        } else {
+            pizzaRepository.save(formPizza);
             return "redirect:/pizzas";
         }
     }

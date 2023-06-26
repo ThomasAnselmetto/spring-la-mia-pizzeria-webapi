@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{/fragments/resources :: head(pageTitle='Crea Pizza')}"></th:block>
+</head>
+<body>
+<div class="container">
+    <nav th:replace="~{/fragments/resources :: navbar(currentPage)}" th:classappend="${currentPage == 'create' ? 'active' : '' }"></nav>
+
+        <form class="row"
+              id="pizza-form"
+             th:action="@{/pizzas/create}"
+            th:object="${pizza}"
+            method="POST" >
+
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome*</label>
+                    <input type="text" th:errorClass="is-invalid" class="form-control" id="nome" name="nome" th:field="*{nome}"
+                           placeholder="specifiche...">
+                </div>
+<!--                vado a prendere gli errori specifici-->
+<!--                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">-->
+<!--                    <ul>-->
+<!--                        <li th:each=""></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="descrizione" class="form-label">Nome*</label>
+                    <input type="text" th:errorClass="is-invalid" class="form-control" id="descrizione" name="descrizione" th:field="*{descrizione}"
+                           placeholder="specifiche...">
+                </div>
+                <!--                vado a prendere gli errori specifici-->
+                <!--                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">-->
+                <!--                    <ul>-->
+                <!--                        <li th:each=""></li>-->
+                <!--                    </ul>-->
+                <!--                </div>-->
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="fotoUrl" class="form-label">Nome*</label>
+                    <input type="text" th:errorClass="is-invalid" class="form-control" id="fotoUrl" name="fotoUrl" th:field="*{fotoUrl}"
+                           placeholder="specifiche...">
+                </div>
+                <!--                vado a prendere gli errori specifici-->
+                <!--                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">-->
+                <!--                    <ul>-->
+                <!--                        <li th:each=""></li>-->
+                <!--                    </ul>-->
+                <!--                </div>-->
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="prezzo" class="form-label">Nome*</label>
+                    <input type="text" th:errorClass="is-invalid" class="form-control" id="prezzo" name="prezzo" th:field="*{prezzo}"
+                           placeholder="specifiche...">
+                </div>
+                <!--                vado a prendere gli errori specifici-->
+                <!--                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">-->
+                <!--                    <ul>-->
+                <!--                        <li th:each=""></li>-->
+                <!--                    </ul>-->
+                <!--                </div>-->
+            </div>
+            <button type="submit" class="btn btn-primary">Inserisci la tua pizza</button>
+        </form>
+</div>
+</div>
+
+</body>
+</html>
+
+

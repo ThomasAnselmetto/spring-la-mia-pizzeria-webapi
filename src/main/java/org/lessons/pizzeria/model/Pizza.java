@@ -1,6 +1,7 @@
 package org.lessons.pizzeria.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,10 +15,12 @@ public class Pizza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank(message = "Il nome della pizza non puo' essere vuoto")
     @Column(nullable = false)
     private String nome;
     private String descrizione;
     private String fotoUrl;
+    @NotBlank(message = "Il prezzo della pizza non puo' essere vuoto")
     @Column(nullable = false)
     private BigDecimal prezzo;
     private LocalDateTime createdAt;

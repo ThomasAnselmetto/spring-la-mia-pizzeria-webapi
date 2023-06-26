@@ -4,7 +4,8 @@
     <th:block th:replace="~{/fragments/resources :: head(pageTitle = ${pizzaDetail.getNome()})}"></th:block>
 </head>
 <body>
-<nav th:replace="~{/fragments/resources :: navbar(currentPage)}"></nav>
+<nav th:replace="~{/fragments/resources :: navbar(currentPage)}"
+     th:classappend="${currentPage == 'show' ? 'active' : '' }"></nav>
 <div class="container">
     <div class="row mt-5">
         <div class="col-6 offset-3">
