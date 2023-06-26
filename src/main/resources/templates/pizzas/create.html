@@ -7,13 +7,14 @@
 <nav th:replace="~{/fragments/resources :: navbar(currentPage)}" th:classappend="${currentPage == 'create' ? 'active' : '' }"></nav>
 <div class="container">
 
-        <form class="row mt-5"
+        <form class="row mt-5 fw-bold"
               id="pizza-form"
              th:action="@{/pizzas/create}"
             th:object="${pizza}"
             method="POST" >
 <!--            LA VOCE ALL'INTERNO DEI FIELDS DEVE ESSERE UGUALE AGLI ATTRIBUTI DEL MODEL-->
 <!--            nome-->
+
             <div class="col-6">
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome*</label>

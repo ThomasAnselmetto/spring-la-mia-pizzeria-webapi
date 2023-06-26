@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,11 +70,14 @@ public class PizzaController {
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
 //        i dati della pizza sono dentro all'oggetto' formPizza
-//        verifico se in validazione ci sono stati errrori
+//        verifico se in validazione ci sono stati errori
+
+        formPizza.setCreatedAt(LocalDateTime.now());
         if (bindingResult.hasErrors()) {
 //            se ci sono errori
             return "/pizzas/create";
         } else {
+//            save vuole un entita' come parametro il metodo fa un create sql se non trova la PK altrimenti fa update
             pizzaRepository.save(formPizza);
             return "redirect:/pizzas";
         }
