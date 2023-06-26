@@ -4,15 +4,16 @@
     <th:block th:replace="~{/fragments/resources :: head(pageTitle='Crea Pizza')}"></th:block>
 </head>
 <body>
+<nav th:replace="~{/fragments/resources :: navbar(currentPage)}" th:classappend="${currentPage == 'create' ? 'active' : '' }"></nav>
 <div class="container">
-    <nav th:replace="~{/fragments/resources :: navbar(currentPage)}" th:classappend="${currentPage == 'create' ? 'active' : '' }"></nav>
 
-        <form class="row"
+        <form class="row mt-5"
               id="pizza-form"
              th:action="@{/pizzas/create}"
             th:object="${pizza}"
             method="POST" >
-
+<!--            LA VOCE ALL'INTERNO DEI FIELDS DEVE ESSERE UGUALE AGLI ATTRIBUTI DEL MODEL-->
+<!--            nome-->
             <div class="col-6">
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome*</label>
@@ -26,9 +27,10 @@
 <!--                    </ul>-->
 <!--                </div>-->
             </div>
+<!--            descrizione-->
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="descrizione" class="form-label">Nome*</label>
+                    <label for="descrizione" class="form-label">Descrizione</label>
                     <input type="text" th:errorClass="is-invalid" class="form-control" id="descrizione" name="descrizione" th:field="*{descrizione}"
                            placeholder="specifiche...">
                 </div>
@@ -39,9 +41,10 @@
                 <!--                    </ul>-->
                 <!--                </div>-->
             </div>
+<!--            fotoUrl-->
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="fotoUrl" class="form-label">Nome*</label>
+                    <label for="fotoUrl" class="form-label">Url Foto</label>
                     <input type="text" th:errorClass="is-invalid" class="form-control" id="fotoUrl" name="fotoUrl" th:field="*{fotoUrl}"
                            placeholder="specifiche...">
                 </div>
@@ -52,9 +55,10 @@
                 <!--                    </ul>-->
                 <!--                </div>-->
             </div>
+<!--            prezzo-->
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="prezzo" class="form-label">Nome*</label>
+                    <label for="prezzo" class="form-label">Prezzo*</label>
                     <input type="text" th:errorClass="is-invalid" class="form-control" id="prezzo" name="prezzo" th:field="*{prezzo}"
                            placeholder="specifiche...">
                 </div>
@@ -65,7 +69,11 @@
                 <!--                    </ul>-->
                 <!--                </div>-->
             </div>
-            <button type="submit" class="btn btn-primary">Inserisci la tua pizza</button>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Inserisci la tua pizza</button>
+                <a  class="btn btn-secondary" th:href="@{/pizzas}">Torna Indietro</a>
+            </div>
+
         </form>
 </div>
 </div>

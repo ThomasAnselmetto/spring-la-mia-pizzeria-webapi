@@ -29,6 +29,8 @@ public class PizzaController {
     //    metodo che puo' ricevere opzionalmente un parametro da query string.
 //            se quel parametro c'e dobbiamo filtrare per quel parametro se quel parametro non c'e' dobbiamo restituire tutte le pizze'
 //    "keyword e' la parola che ritroviamo nella barra di ricerca"
+
+    //INDEX
     @GetMapping()
     public String index(@RequestParam(name = "keyword", required = false) String searchString, Model model) {
         List<Pizza> pizzas;
@@ -43,6 +45,7 @@ public class PizzaController {
 
     }
 
+    //    SHOW
     @GetMapping("/{id}")
     public String detail(Model model, @PathVariable Integer id) {
         Optional<Pizza> pizzaId = pizzaRepository.findById(id);
@@ -55,12 +58,14 @@ public class PizzaController {
         }
     }
 
+    //CREATE get del browser per mostrare il form
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("pizza", new Pizza());
         return "/pizzas/create"; //view di riferimento
     }
 
+    //post del browser con all'interno gli elementi scritti nel form'
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
 //        i dati della pizza sono dentro all'oggetto' formPizza
