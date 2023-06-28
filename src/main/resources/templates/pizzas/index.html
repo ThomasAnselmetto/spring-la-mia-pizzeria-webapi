@@ -6,46 +6,53 @@
 
 </head>
 <body>
-<nav th:replace="~{/fragments/resources :: navbar(currentPage)}" th:classappend="${currentPage == 'index' ? 'active' : '' }"></nav>
-<div class="container">
-    <h1 class="mt-4">Le nostre pizze</h1>
-    </hr>
-<!--   link per la create-->
-    <div class="d-flex align-items-center justify-content-between">
-        <a class="btn btn-primary" th:href="@{/pizzas/create}">Aggiungi Pizza</a>
-        <form th:action="@{/pizzas}" method="GET">
-            <div class="mb-3">
-                <label for="keyword" class="form-label">Cerca Pizza</label>
-                <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Cerca Qui...">
-            </div>
-            <button type="submit" class="btn btn-primary">Ricerca</button>
-        </form>
+<nav th:replace="~{/fragments/resources :: navbar(currentPage = 'index')}" ></nav>
+<section class="index-section">
+
+    <div class="container">
+        <h1 class="mt-4">Le nostre pizze</h1>
+        </hr>
+        <!--   link per la create-->
+        <div class="d-flex align-items-center justify-content-between">
+            <a class="btn btn-primary" th:href="@{/pizzas/create}">Aggiungi Pizza</a>
+            <form th:action="@{/pizzas}" method="GET">
+                <div class="mb-3">
+                    <label for="keyword" class="form-label">Cerca Pizza</label>
+                    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Cerca Qui...">
+                </div>
+                <button type="submit" class="btn btn-primary">Ricerca</button>
+            </form>
+        </div>
+
+
+
+        <table class="mt-3 fw-bold" th:if="${pizzas.size() != 0}">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Descrizione</th>
+                <th>Foto</th>
+                <th>Prezzo</th>
+                <th>Data Creazione</th>
+                <th>Data di Modifica</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pizza : ${pizzas}">
+                <td><a th:href="@{|/pizzas/${pizza.id}|}">[[${pizza.nome}]]</a></td>
+                <td th:text="${pizza.descrizione}"></td>
+                <td th:text="${pizza.ingredienti}"></td>
+                <td><img class="table-img" th:src="${pizza.fotoUrl}" th:alt="${pizza.nome}"></td>
+                <td th:text="|€ ${pizza.prezzo}|"></td>
+                <td th:text="${pizza.getFormattedDate()}"></td>
+                <td th:text="${pizza.getFormattedDate()}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+        <h3 th:unless="${pizzas.size() != 0}">Nessuna Pizza da mostrare</h3>
     </div>
-
-
-
-    <table class="mt-3 fw-bold" th:if="${pizzas.size() != 0}">
-        <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Descrizione</th>
-            <th>Foto</th>
-            <th>Prezzo</th>
-            <th>Data Creazione</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="pizza : ${pizzas}">
-            <td><a th:href="@{|/pizzas/${pizza.id}|}">[[${pizza.nome}]]</a></td>
-            <td th:text="${pizza.descrizione}"></td>
-            <td><img class="table-img" th:src="${pizza.fotoUrl}" th:alt="${pizza.nome}"></td>
-            <td th:text="|€ ${pizza.prezzo}|"></td>
-            <td th:text="${pizza.getFormattedDate()}"></td>
-
-        </tr>
-        </tbody>
-    </table>
-    <h3 th:unless="${pizzas.size() != 0}">Nessuna Pizza da mostrare</h3>
-</div>
+</section>
 </body>
 </html>

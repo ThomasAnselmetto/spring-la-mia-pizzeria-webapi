@@ -1,6 +1,10 @@
 package org.lessons.pizzeria.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,13 +17,16 @@ public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    //    @NotBlank(message = "Il nome della pizza non puo' essere vuoto")
+    @Size(min = 4, max = 30)
+    @NotBlank(message = "Il nome della pizza non puo' essere vuoto")
     @Column(nullable = false)
     private String nome;
+
     private String descrizione;
+    private String ingredienti;
     private String fotoUrl;
-    //    @NotBlank(message = "Il prezzo della pizza non puo' essere vuoto")
+    @DecimalMin(value = "0.0", message = "Il prezzo deve essere superiore a 0.0")
+    @NotNull(message = "Il prezzo della pizza non puo' essere vuoto")
     @Column(nullable = false)
     private BigDecimal prezzo;
     private LocalDateTime createdAt;
@@ -28,10 +35,11 @@ public class Pizza {
     //costruttore con parametri
 
 
-    public Pizza(Integer id, String nome, String descrizione, String fotoUrl, BigDecimal prezzo, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Pizza(Integer id, String nome, String descrizione, String ingredienti, String fotoUrl, @NotNull(message = "Il prezzo della pizza non puo' essere vuoto") BigDecimal prezzo, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.nome = nome;
         this.descrizione = descrizione;
+        this.ingredienti = ingredienti;
         this.fotoUrl = fotoUrl;
         this.prezzo = prezzo;
         this.createdAt = createdAt;
@@ -66,6 +74,14 @@ public class Pizza {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    public String getIngredienti() {
+        return ingredienti;
+    }
+
+    public void setIngredienti(String ingredienti) {
+        this.ingredienti = ingredienti;
     }
 
     public String getFotoUrl() {
@@ -103,7 +119,7 @@ public class Pizza {
     // getter custom per il timestamp formattato
     public String getFormattedDate() {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMMM dd 'at' HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMMM dd 'alle' HH:mm");
         return now.format(formatter);
     }
 }

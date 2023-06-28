@@ -4,16 +4,18 @@
     <th:block th:replace="~{/fragments/resources :: head(pageTitle='Crea Pizza')}"></th:block>
 </head>
 <body>
-<nav th:replace="~{/fragments/resources :: navbar(currentPage)}" th:classappend="${currentPage == 'create' ? 'active' : '' }"></nav>
-<div class="container">
+<nav th:replace="~{/fragments/resources :: navbar(currentPage = 'create')}" ></nav>
+<section class="create-section">
 
+
+    <div class="container">
         <form class="row mt-5 fw-bold"
               id="pizza-form"
-             th:action="@{/pizzas/create}"
-            th:object="${pizza}"
-            method="POST" >
-<!--            LA VOCE ALL'INTERNO DEI FIELDS DEVE ESSERE UGUALE AGLI ATTRIBUTI DEL MODEL-->
-<!--            nome-->
+              th:action="@{/pizzas/create}"
+              th:object="${pizza}"
+              method="POST" >
+            <!--            LA VOCE ALL'INTERNO DEI FIELDS DEVE ESSERE UGUALE AGLI ATTRIBUTI DEL MODEL-->
+            <!--            nome-->
 
             <div class="col-6">
                 <div class="mb-3">
@@ -21,14 +23,14 @@
                     <input type="text" th:errorClass="is-invalid" class="form-control" id="nome" name="nome" th:field="*{nome}"
                            placeholder="specifiche...">
                 </div>
-<!--                vado a prendere gli errori specifici-->
-<!--                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">-->
-<!--                    <ul>-->
-<!--                        <li th:each=""></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
+                <!--                vado a prendere gli errori specifici-->
+                <!--                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">-->
+                <!--                    <ul>-->
+                <!--                        <li th:each=""></li>-->
+                <!--                    </ul>-->
+                <!--                </div>-->
             </div>
-<!--            descrizione-->
+            <!--            descrizione-->
             <div class="col-6">
                 <div class="mb-3">
                     <label for="descrizione" class="form-label">Descrizione</label>
@@ -42,7 +44,7 @@
                 <!--                    </ul>-->
                 <!--                </div>-->
             </div>
-<!--            fotoUrl-->
+            <!--            fotoUrl-->
             <div class="col-6">
                 <div class="mb-3">
                     <label for="fotoUrl" class="form-label">Url Foto</label>
@@ -56,7 +58,7 @@
                 <!--                    </ul>-->
                 <!--                </div>-->
             </div>
-<!--            prezzo-->
+            <!--            prezzo-->
             <div class="col-6">
                 <div class="mb-3">
                     <label for="prezzo" class="form-label">Prezzo*</label>
@@ -76,8 +78,11 @@
             </div>
 
         </form>
-</div>
-</div>
+    </div>
+    </div>
+</section>
+
+
 
 </body>
 </html>

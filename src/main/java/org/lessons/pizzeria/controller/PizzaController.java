@@ -70,20 +70,31 @@ public class PizzaController {
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
 //        i dati della pizza sono dentro all'oggetto' formPizza
-//        verifico se in validazione ci sono stati errori
 
-        formPizza.setCreatedAt(LocalDateTime.now());
+//        verifico se in validazione ci sono stati errori
         if (bindingResult.hasErrors()) {
 //            se ci sono errori
+
             return "/pizzas/create";
         } else {
+            formPizza.setCreatedAt(LocalDateTime.now());
+
 //            save vuole un entita' come parametro il metodo fa un create sql se non trova la PK altrimenti fa update
             pizzaRepository.save(formPizza);
             return "redirect:/pizzas";
         }
     }
-
 }
+
+
+//DELETE
+//    @PostMapping("/delete/{id}")
+//    public String delete(@PathVariable Integer id){}
+////verifichiamo che esista la pizza con quell'id
+//    Pizza pizzaDaCancellare = get
+//    //redirect alla lista
+//}
+
 
 
 

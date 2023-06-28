@@ -4,21 +4,25 @@
     <th:block th:replace="~{/fragments/resources :: head(pageTitle = ${pizzaDetail.getNome()})}"></th:block>
 </head>
 <body>
+
 <nav th:replace="~{/fragments/resources :: navbar(currentPage)}"
      th:classappend="${currentPage == 'show' ? 'active' : '' }"></nav>
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-6 offset-3">
-            <div class="card colored-card">
-                <img th:src="${pizzaDetail.FotoUrl}" class="card-img-top" th:alt="${pizzaDetail.nome}">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${pizzaDetail.nome}"></h5>
-                    <p class="card-text" th:text="${pizzaDetail.descrizione}"></p>
-                    <a th:href="@{/pizzas}" class="btn btn-primary">Torna al menu</a>
+<section class="show-section">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-6 offset-3">
+                <div class="card colored-card">
+                    <img th:src="${pizzaDetail.FotoUrl}" class="card-img-top" th:alt="${pizzaDetail.nome}">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${pizzaDetail.nome}"></h5>
+                        <p class="card-text" th:text="${pizzaDetail.descrizione}"></p>
+                        <a th:href="@{/pizzas}" class="btn btn-primary">Torna al menu</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
 </body>
 </html>
