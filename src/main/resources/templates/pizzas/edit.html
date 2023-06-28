@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="~{/fragments/resources :: head(pageTitle='Crea Pizza')}"></th:block>
+    <th:block th:replace="~{/fragments/resources :: head(pageTitle='Edit')}"></th:block>
 </head>
 <body>
-<nav th:replace="~{/fragments/resources :: navbar(currentPage = 'create')}" ></nav>
+<nav th:replace="~{/fragments/resources :: navbar(currentPage = 'edit')}"></nav>
 <section class="create-section">
-
-
+    <h1>Modifica <span th:text="${pizza.nome}"></span></h1>
     <div class="container">
         <form class="row mt-5 fw-bold"
               id="pizza-form"
@@ -44,7 +43,7 @@
                 <!--                    </ul>-->
                 <!--                </div>-->
             </div>
-<!--            ingredienti-->
+            <!--            ingredienti-->
             <div class="col-6">
                 <div class="mb-3">
                     <label for="ingredienti" class="form-label">Ingredienti</label>
@@ -100,5 +99,3 @@
 
 </body>
 </html>
-
-

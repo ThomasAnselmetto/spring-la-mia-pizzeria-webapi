@@ -4,10 +4,12 @@ import jakarta.validation.Valid;
 import org.lessons.pizzeria.model.Pizza;
 import org.lessons.pizzeria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -84,6 +86,21 @@ public class PizzaController {
             return "redirect:/pizzas";
         }
     }
+
+    //UPDATE
+    @GetMapping("edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+//    ver pizza con quell'id' uso findById di Repository per creare un Optional
+        Optional<Pizza> result = pizzaRepository.findById(id);
+        if (result.isEmpty()) {
+//    se non esiste lancio eccezione
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "la pizza con id" + id + "non e' stata trovata"); //eccezione che deve ridare una risposta http quindi uno status
+//    aggiungo la pizza al model(get restituisce la Pizza che in Optional(che e' un contenitore di oggetti Pizza))
+
+        }
+        model.addAttribute("pizza", result.get());
+        return "pizzas/edit";
+    }
 }
 
 
@@ -94,6 +111,9 @@ public class PizzaController {
 //    Pizza pizzaDaCancellare = get
 //    //redirect alla lista
 //}
+
+
+
 
 
 

@@ -16,9 +16,10 @@ border:1px solid black;
 padding:7px
 }
 .index-section{
-height:100vh;
+height:100%;
 background: rgb(250,250,250);
 background: linear-gradient(180deg, rgba(250,250,250,1) 0%, rgba(247,247,106,1) 35%, rgba(255,151,6,1) 100%);
+padding-bottom:7rem;
 }
 .show-section{
 height:100vh;
@@ -41,3 +42,12 @@ background: linear-gradient(0deg, rgba(249,249,252,1) 0%, rgba(231,231,231,1) 35
 .btn{
 font-weight: bold;;
 }
+.nome-link{
+text-decoration:none;
+font-size:22px;
+color:#ff6f3c;
+}
+.nome-link:hover{
+color:black;
+}
+

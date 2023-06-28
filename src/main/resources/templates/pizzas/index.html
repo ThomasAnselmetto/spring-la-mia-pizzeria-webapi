@@ -36,17 +36,22 @@
                 <th>Prezzo</th>
                 <th>Data Creazione</th>
                 <th>Data di Modifica</th>
+                <th>Azioni</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="pizza : ${pizzas}">
-                <td><a th:href="@{|/pizzas/${pizza.id}|}">[[${pizza.nome}]]</a></td>
+                <td><a class="nome-link" th:href="@{|/pizzas/${pizza.id}|}">[[${pizza.nome}]]</a></td>
                 <td th:text="${pizza.descrizione}"></td>
                 <td th:text="${pizza.ingredienti}"></td>
                 <td><img class="table-img" th:src="${pizza.fotoUrl}" th:alt="${pizza.nome}"></td>
                 <td th:text="|€ ${pizza.prezzo}|"></td>
                 <td th:text="${pizza.getFormattedDate()}"></td>
                 <td th:text="${pizza.getFormattedDate()}"></td>
+                <td>
+                    <a class="nome-link" th:href="@{|/pizzas/edit/${pizza.id}|}">EDIT</a>
+                </td>
+
 
             </tr>
             </tbody>
