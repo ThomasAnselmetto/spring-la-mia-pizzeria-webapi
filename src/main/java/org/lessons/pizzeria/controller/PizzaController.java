@@ -51,21 +51,25 @@ public class PizzaController {
     //    SHOW
     @GetMapping("/{id}")
     public String detail(Model model, @PathVariable Integer id) {
-        Optional<Pizza> pizzaId = pizzaRepository.findById(id);
-        if (pizzaId.isPresent()) {
-            Pizza pizzaShow = pizzaId.get();
-            model.addAttribute("pizzaDetail", pizzaShow);
-            return "/pizzas/show";
-        } else {
-            return "redirect:/pizzas";
-        }
+//        Optional<Pizza> pizzaId = pizzaRepository.findById(id);
+//        if (pizzaId.isPresent()) {
+//            Pizza pizzaShow = pizzaId.get();
+//            model.addAttribute("pizzaDetail", pizzaShow);
+//            return "/pizzas/show";
+//        } else {
+//            return "redirect:/pizzas";
+//        }
+        Pizza pizzaById = getPizzaById(id);
+        model.addAttribute("pizzaDetail", pizzaById);
+        return "/pizzas/show";
     }
 
     //CREATE get del browser per mostrare il form
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("pizza", new Pizza());
-        return "/pizzas/create"; //view di riferimento
+//        return "/pizzas/create"; //view di riferimento
+        return "/pizzas/edit";
     }
 
     //post del browser con all'interno gli elementi scritti nel form'
@@ -77,7 +81,7 @@ public class PizzaController {
         if (bindingResult.hasErrors()) {
 //            se ci sono errori
 
-            return "/pizzas/create";
+            return "/pizzas/edit";
         } else {
             formPizza.setCreatedAt(LocalDateTime.now());
 
@@ -90,6 +94,26 @@ public class PizzaController {
     //UPDATE
     @GetMapping("edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
+        Pizza pizzaById = getPizzaById(id);
+        model.addAttribute("pizza", pizzaById);
+        return "/pizzas/edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+        Pizza PizzatoEdit = getPizzaById(id); //fotografia della pizza pre-modifica
+//        trasferisco su formPizza tutti i dati che non sono presenti nel form(altrimenti li perdo)
+        formPizza.setId(PizzatoEdit.getId());
+        formPizza.setCreatedAt(PizzatoEdit.getCreatedAt());
+//        salvo i dati passando a pizzaRepo il formPizza completo
+        pizzaRepository.save(formPizza);
+        return "redirect:/pizzas";
+
+    }
+
+//Metodo per selezionare pizza da DB per ID o lancio di eccezione
+
+    private Pizza getPizzaById(Integer id) {
 //    ver pizza con quell'id' uso findById di Repository per creare un Optional
         Optional<Pizza> result = pizzaRepository.findById(id);
         if (result.isEmpty()) {
@@ -98,9 +122,9 @@ public class PizzaController {
 //    aggiungo la pizza al model(get restituisce la Pizza che in Optional(che e' un contenitore di oggetti Pizza))
 
         }
-        model.addAttribute("pizza", result.get());
-        return "pizzas/edit";
+        return result.get();
     }
+
 }
 
 

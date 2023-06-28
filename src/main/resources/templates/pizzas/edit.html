@@ -3,31 +3,34 @@
 <head>
     <th:block th:replace="~{/fragments/resources :: head(pageTitle='Edit')}"></th:block>
 </head>
-<body>
+<body th:with="isEdit=${pizza.id != null}">
+
 <nav th:replace="~{/fragments/resources :: navbar(currentPage = 'edit')}"></nav>
 <section class="create-section">
-    <h1>Modifica <span th:text="${pizza.nome}"></span></h1>
+    <h1 class="m-4" th:text="${isEdit} ? 'Modifica ' + ${pizza.nome} : 'Crea Pizza'"></h1>
+
     <div class="container">
-        <form class="row mt-5 fw-bold"
+        <form th:with:="formAction=${isEdit ? '/pizzas/edit/' + pizza.id : '/pizzas/create'}"
+              class="row mt-5 fw-bold"
               id="pizza-form"
-              th:action="@{/pizzas/create}"
+              th:action="@{${formAction}}"
               th:object="${pizza}"
               method="POST" >
             <!--            LA VOCE ALL'INTERNO DEI FIELDS DEVE ESSERE UGUALE AGLI ATTRIBUTI DEL MODEL-->
             <!--            nome-->
 
             <div class="col-6">
-                <div class="mb-3">
+
                     <label for="nome" class="form-label">Nome*</label>
                     <input type="text" th:errorClass="is-invalid" class="form-control" id="nome" name="nome" th:field="*{nome}"
                            placeholder="specifiche...">
+                <!--            vado a prendere gli errori specifici-->
+                <div th:if="${#fields.hasErrors('nome')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('nome')}" th:text="${err}"></li>
+                    </ul>
                 </div>
-                <!--                vado a prendere gli errori specifici-->
-                <!--                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">-->
-                <!--                    <ul>-->
-                <!--                        <li th:each=""></li>-->
-                <!--                    </ul>-->
-                <!--                </div>-->
+
             </div>
             <!--            descrizione-->
             <div class="col-6">

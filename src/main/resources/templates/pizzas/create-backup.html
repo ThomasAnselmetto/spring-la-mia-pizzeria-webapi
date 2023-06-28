@@ -1,0 +1,103 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <th:block th:replace="~{/fragments/resources :: head(pageTitle='Crea Pizza')}"></th:block>-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav th:replace="~{/fragments/resources :: navbar(currentPage = 'create')}" ></nav>-->
+<!--<section class="create-section">-->
+
+
+<!--    <div class="container">-->
+<!--        <form class="row mt-5 fw-bold"-->
+<!--              id="pizza-form"-->
+<!--              th:action="@{/pizzas/create}"-->
+<!--              th:object="${pizza}"-->
+<!--              method="POST" >-->
+<!--            &lt;!&ndash;            LA VOCE ALL'INTERNO DEI FIELDS DEVE ESSERE UGUALE AGLI ATTRIBUTI DEL MODEL&ndash;&gt;-->
+<!--            &lt;!&ndash;            nome&ndash;&gt;-->
+
+<!--            <div class="col-6">-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="nome" class="form-label">Nome*</label>-->
+<!--                    <input type="text" th:errorClass="is-invalid" class="form-control" id="nome" name="nome" th:field="*{nome}"-->
+<!--                           placeholder="specifiche...">-->
+<!--                </div>-->
+<!--                &lt;!&ndash;                vado a prendere gli errori specifici&ndash;&gt;-->
+<!--                &lt;!&ndash;                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <ul>&ndash;&gt;-->
+<!--                &lt;!&ndash;                        <li th:each=""></li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    </ul>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            </div>-->
+<!--            &lt;!&ndash;            descrizione&ndash;&gt;-->
+<!--            <div class="col-6">-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="descrizione" class="form-label">Descrizione</label>-->
+<!--                    <input type="text" th:errorClass="is-invalid" class="form-control" id="descrizione" name="descrizione" th:field="*{descrizione}"-->
+<!--                           placeholder="specifiche...">-->
+<!--                </div>-->
+<!--                &lt;!&ndash;                vado a prendere gli errori specifici&ndash;&gt;-->
+<!--                &lt;!&ndash;                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <ul>&ndash;&gt;-->
+<!--                &lt;!&ndash;                        <li th:each=""></li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    </ul>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            </div>-->
+<!--&lt;!&ndash;            ingredienti&ndash;&gt;-->
+<!--            <div class="col-6">-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="ingredienti" class="form-label">Ingredienti</label>-->
+<!--                    <input type="text" th:errorClass="is-invalid" class="form-control" id="ingredienti" name="ingredienti" th:field="*{ingredienti}"-->
+<!--                           placeholder="specifiche...">-->
+<!--                </div>-->
+<!--                &lt;!&ndash;                vado a prendere gli errori specifici&ndash;&gt;-->
+<!--                &lt;!&ndash;                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <ul>&ndash;&gt;-->
+<!--                &lt;!&ndash;                        <li th:each=""></li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    </ul>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            </div>-->
+<!--            &lt;!&ndash;            fotoUrl&ndash;&gt;-->
+<!--            <div class="col-6">-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="fotoUrl" class="form-label">Url Foto</label>-->
+<!--                    <input type="text" th:errorClass="is-invalid" class="form-control" id="fotoUrl" name="fotoUrl" th:field="*{fotoUrl}"-->
+<!--                           placeholder="specifiche...">-->
+<!--                </div>-->
+<!--                &lt;!&ndash;                vado a prendere gli errori specifici&ndash;&gt;-->
+<!--                &lt;!&ndash;                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <ul>&ndash;&gt;-->
+<!--                &lt;!&ndash;                        <li th:each=""></li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    </ul>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            </div>-->
+<!--            &lt;!&ndash;            prezzo&ndash;&gt;-->
+<!--            <div class="col-6">-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="prezzo" class="form-label">Prezzo*</label>-->
+<!--                    <input type="text" th:errorClass="is-invalid" class="form-control" id="prezzo" name="prezzo" th:field="*{prezzo}"-->
+<!--                           placeholder="specifiche...">-->
+<!--                </div>-->
+<!--                &lt;!&ndash;                vado a prendere gli errori specifici&ndash;&gt;-->
+<!--                &lt;!&ndash;                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <ul>&ndash;&gt;-->
+<!--                &lt;!&ndash;                        <li th:each=""></li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    </ul>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="col d-flex justify-content-end align-items-end pb-3">-->
+<!--                <button type="submit" class="btn btn-primary">Inserisci la tua pizza</button>-->
+<!--                <a  class="btn btn-secondary ms-3" th:href="@{/pizzas}">Torna Indietro</a>-->
+<!--            </div>-->
+
+<!--        </form>-->
+<!--    </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+
+<!--</body>-->
+<!--</html>-->
+
+

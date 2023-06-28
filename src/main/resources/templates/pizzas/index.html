@@ -49,7 +49,8 @@
                 <td th:text="${pizza.getFormattedDate()}"></td>
                 <td th:text="${pizza.getFormattedDate()}"></td>
                 <td>
-                    <a class="nome-link" th:href="@{|/pizzas/edit/${pizza.id}|}">EDIT</a>
+                    <a class="nome-link" th:href="@{|/pizzas/edit/${pizza.id}|}"><i class="fa-solid fa-pen-to-square"></i></a>
+<!--                    <a class="nome-link" th:href="@{|/pizzas/edit/${pizza.id}|}"><i class="fa-solid fa-trash-can"></i></a>-->
                 </td>
 
 

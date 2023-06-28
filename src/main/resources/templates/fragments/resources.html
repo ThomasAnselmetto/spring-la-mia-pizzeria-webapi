@@ -4,36 +4,37 @@
     <!-- fragment che si chiama head e prende un parametro title -->
     <th:block th:fragment="head(pageTitle)">
         <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+              name="viewport">
+        <meta content="ie=edge" http-equiv="X-UA-Compatible">
         <!-- includo bootstrap css e js -->
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
-        <link th:href="@{/CSS/style.css}" rel="stylesheet">
-        <script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}" defer></script>
+        <link rel="stylesheet" th:href="@{/CSS/style.css}">
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.2.0/css/all.min.css}">
+        <script defer th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
         <!-- il title della pagina cambia e lo leggo dal parametro del fragment -->
         <title th:text="${pageTitle}"></title>
     </th:block>
 </head>
 <body>
 <!--credo di dover passare un parametro-->
-<nav th:fragment="navbar(currentPage)" class="navbar navbar-expand-lg bg-body-tertiary border">
+<nav class="navbar navbar-expand-lg bg-body-tertiary border" th:fragment="navbar(currentPage)">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/pizzas}"><img class="logo-pizzeria" th:src="@{/cartoon-pizza.jpg}"
-                                                          alt="Cartoon Pizza"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" th:href="@{/pizzas}"><img alt="Cartoon Pizza" class="logo-pizzeria"
+                                                          th:src="@{/cartoon-pizza.jpg}"></a>
+        <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link fw-bold" aria-current="page" th:href="@{/pizzas}"
-                       th:classappend="${currentPage == 'index' ? 'active' : '' }">Menu</a>
+                    <a aria-current="page" class="nav-link fw-bold" th:classappend="${currentPage == 'index' ? 'active' : '' }"
+                       th:href="@{/pizzas}">Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-bold" th:href="@{/pizzas/create}"
-                       th:classappend="${currentPage == 'create' ? 'active' : '' }"
+                    <a class="nav-link fw-bold" th:classappend="${currentPage == 'create' ? 'active' : '' }"
+                       th:href="@{/pizzas/create}"
                     >Creazione</a>
                 </li>
             </ul>
