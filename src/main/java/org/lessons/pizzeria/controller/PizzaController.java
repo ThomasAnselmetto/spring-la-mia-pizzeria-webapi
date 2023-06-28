@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -113,12 +114,16 @@ public class PizzaController {
 
     //DELETE
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id) {
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         //verifichiamo che esista la pizza con quell'id
-        Pizza PizzaToDelete = getPizzaById(id);
+        Pizza pizzaToDelete = getPizzaById(id);
 //    lo cancelliamo (ci siamo passati l'entity e dunque siamo certi che se arrivo a questo punto ho preso l'entity per id             diversamente il nostro metodo throws)
-        pizzaRepository.delete(PizzaToDelete);
+        pizzaRepository.delete(pizzaToDelete);
         //redirect alla lista
+//        prima di fare la ridirect voglio passare una mappa di attributi ed usero redirectAttributes(interfaccia di specializzazione del model) (ha un nome e un valore)
+        redirectAttributes.addFlashAttribute("message", "Pizza " + pizzaToDelete.getNome() + " eliminata dalla lista.");
+//        Aggiungo un messaggio di successo come flashattribute
+
         return "redirect:/pizzas";
 
     }

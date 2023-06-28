@@ -42,5 +42,8 @@
         </div>
     </div>
 </nav>
+<div th:fragment="messages">
+    <div class="alert alert-warning fw-bold" role="alert" th:if="${message != null}" th:text="${message}"></div>
+</div>
 <hr>
 </body>

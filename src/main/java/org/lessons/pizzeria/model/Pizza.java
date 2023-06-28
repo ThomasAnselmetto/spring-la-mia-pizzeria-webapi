@@ -17,15 +17,15 @@ public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Size(min = 4, max = 30)
-    @NotBlank(message = "Il nome della pizza non puo' essere vuoto")
+    @Size(min = 4, max = 30, message = "Il numero di caratteri per il nome va da 4 a 30!")
+    @NotBlank(message = "Il nome della pizza non puo' essere vuoto!")
     @Column(nullable = false)
     private String nome;
 
     private String descrizione;
     private String ingredienti;
     private String fotoUrl;
-    @DecimalMin(value = "0.0", message = "Il prezzo deve essere superiore a 0.0")
+    @DecimalMin(value = "0", message = "Il prezzo deve essere superiore a 0.0")
     @NotNull(message = "Il prezzo della pizza non puo' essere vuoto")
     @Column(nullable = false)
     private BigDecimal prezzo;

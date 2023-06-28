@@ -7,6 +7,7 @@
 </head>
 <body>
 <nav th:replace="~{/fragments/resources :: navbar(currentPage = 'index')}" ></nav>
+<div  th:replace="~{/fragments/resources :: messages}"></div>
 <section class="index-section">
 
     <div class="container">
@@ -33,7 +34,7 @@
                 <th>Descrizione</th>
                 <th>Ingredienti</th>
                 <th>Foto</th>
-                <th>Prezzo</th>
+                <th>Prezzo €</th>
                 <th>Data Creazione</th>
                 <th>Data di Modifica</th>
                 <th>Azioni</th>
@@ -45,7 +46,7 @@
                 <td th:text="${pizza.descrizione}"></td>
                 <td th:text="${pizza.ingredienti}"></td>
                 <td><img class="table-img" th:src="${pizza.fotoUrl}" th:alt="${pizza.nome}"></td>
-                <td th:text="|€ ${pizza.prezzo}|"></td>
+                <td th:text="| ${pizza.prezzo}|"></td>
                 <td th:text="${pizza.getFormattedDate()}"></td>
                 <td th:text="${pizza.getFormattedDate()}"></td>
                 <td>
@@ -60,7 +61,12 @@
             </tr>
             </tbody>
         </table>
-        <h3 th:unless="${pizzas.size() != 0}">Nessuna Pizza da mostrare</h3>
+        <table class="row" th:unless="${pizzas.size() != 0}">
+            <td class="col">
+                <h3 >Nessuna Pizza da mostrare</h3>
+            </td>
+        </table>
+
     </div>
 </section>
 </body>

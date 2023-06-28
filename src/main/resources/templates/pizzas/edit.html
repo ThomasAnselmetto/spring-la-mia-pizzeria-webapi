@@ -75,17 +75,16 @@
             </div>
             <!--            prezzo-->
             <div class="col-6">
-                <div class="mb-3">
+
                     <label for="prezzo" class="form-label">Prezzo*</label>
                     <input type="text" th:errorClass="is-invalid" class="form-control" id="prezzo" name="prezzo" th:field="*{prezzo}"
                            placeholder="specifiche...">
+
+                <div th:if="${#fields.hasErrors('prezzo')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('prezzo')}" th:text="${err}"></li>
+                    </ul>
                 </div>
-                <!--                vado a prendere gli errori specifici-->
-                <!--                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">-->
-                <!--                    <ul>-->
-                <!--                        <li th:each=""></li>-->
-                <!--                    </ul>-->
-                <!--                </div>-->
             </div>
             <div class="col d-flex justify-content-end align-items-end pb-3">
                 <button type="submit" class="btn btn-primary">Inserisci la tua pizza</button>
