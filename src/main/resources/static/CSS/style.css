@@ -50,4 +50,7 @@ color:#ff6f3c;
 .nome-link:hover{
 color:black;
 }
-
+.actions{
+border:0;
+background-color: transparent;
+}

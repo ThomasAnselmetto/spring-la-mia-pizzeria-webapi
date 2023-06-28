@@ -111,6 +111,17 @@ public class PizzaController {
 
     }
 
+    //DELETE
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        //verifichiamo che esista la pizza con quell'id
+        Pizza PizzaToDelete = getPizzaById(id);
+//    lo cancelliamo (ci siamo passati l'entity e dunque siamo certi che se arrivo a questo punto ho preso l'entity per id             diversamente il nostro metodo throws)
+        pizzaRepository.delete(PizzaToDelete);
+        //redirect alla lista
+        return "redirect:/pizzas";
+
+    }
 //Metodo per selezionare pizza da DB per ID o lancio di eccezione
 
     private Pizza getPizzaById(Integer id) {
@@ -124,17 +135,12 @@ public class PizzaController {
         }
         return result.get();
     }
-
 }
 
 
-//DELETE
-//    @PostMapping("/delete/{id}")
-//    public String delete(@PathVariable Integer id){}
-////verifichiamo che esista la pizza con quell'id
-//    Pizza pizzaDaCancellare = get
-//    //redirect alla lista
-//}
+
+
+
 
 
 

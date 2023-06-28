@@ -10,10 +10,9 @@
     <h1 class="m-4" th:text="${isEdit} ? 'Modifica ' + ${pizza.nome} : 'Crea Pizza'"></h1>
 
     <div class="container">
-        <form th:with:="formAction=${isEdit ? '/pizzas/edit/' + pizza.id : '/pizzas/create'}"
-              class="row mt-5 fw-bold"
+        <form class="row mt-5 fw-bold"
               id="pizza-form"
-              th:action="@{${formAction}}"
+              th:action="${isEdit} ? '/pizzas/edit/' + ${pizza.id} : '/pizzas/create'"
               th:object="${pizza}"
               method="POST" >
             <!--            LA VOCE ALL'INTERNO DEI FIELDS DEVE ESSERE UGUALE AGLI ATTRIBUTI DEL MODEL-->

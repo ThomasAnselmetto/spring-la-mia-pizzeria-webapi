@@ -26,12 +26,12 @@
 
 
 
-        <table class="mt-3 fw-bold" th:if="${pizzas.size() != 0}">
+        <table class="mt-5 fw-bold" th:if="${pizzas.size() != 0}">
             <thead>
             <tr>
                 <th>Nome</th>
                 <th>Descrizione</th>
-                <th>Descrizione</th>
+                <th>Ingredienti</th>
                 <th>Foto</th>
                 <th>Prezzo</th>
                 <th>Data Creazione</th>
@@ -49,8 +49,11 @@
                 <td th:text="${pizza.getFormattedDate()}"></td>
                 <td th:text="${pizza.getFormattedDate()}"></td>
                 <td>
-                    <a class="nome-link" th:href="@{|/pizzas/edit/${pizza.id}|}"><i class="fa-solid fa-pen-to-square"></i></a>
-<!--                    <a class="nome-link" th:href="@{|/pizzas/edit/${pizza.id}|}"><i class="fa-solid fa-trash-can"></i></a>-->
+                    <button type="button" class="nome-link actions mb-3" th:href="@{|/pizzas/edit/${pizza.id}|}"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <form th:action="@{|/pizzas/delete/${pizza.id}|}" method="POST">
+                        <button type="submit" class="nome-link actions"><i class="fa-solid fa-trash-can"></i></button>
+                    </form>
+
                 </td>
 
 
