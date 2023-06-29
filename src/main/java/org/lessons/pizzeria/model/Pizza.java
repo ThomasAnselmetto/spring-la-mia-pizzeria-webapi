@@ -36,8 +36,8 @@ public class Pizza {
 
     //Relazione con le offerte
     //hibernate in automatico crea una tabella ponte se non stabiliamo che la relazione e'gia' stata mappata sull'entita offerte al campo "pizza" @ManyToOne @JoinColumn(nullable = false) private Pizza pizza;
-
-    @OneToMany(mappedBy = "pizza")
+//    possiamo creare il processo di cascade per poter eliminare tutte le offerte associate se cancelliamo una pizza
+    @OneToMany(mappedBy = "pizza", cascade = {CascadeType.REMOVE})
     private List<Offerta> offerte = new ArrayList<>();
     //costruttore con parametri
 

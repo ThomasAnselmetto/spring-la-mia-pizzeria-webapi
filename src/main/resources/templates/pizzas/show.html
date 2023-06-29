@@ -17,11 +17,11 @@
                         <img class="" th:alt="*{nome}" th:src="*{FotoUrl}">
                     </div>
                     <div class="col-6">
-                        <h2 class="" th:text="*{nome}"></h2>
-                        <h3>Descrizione</h3>
-                        <p class="fw-bold" th:text="*{descrizione}"></p>
-                        <h3>Ingredienti</h3>
-                        <p class="fw-bold" th:text="*{ingredienti}"></p>
+                        <h3 class="" th:text="*{nome}"></h3>
+                        <h5>Descrizione</h5>
+                        <p class="" th:text="*{descrizione}"></p>
+                        <h5>Ingredienti</h5>
+                        <p class="" th:text="*{ingredienti}"></p>
 
                         <a class="btn btn-primary" th:href="@{/pizzas}">Torna al menu</a>
                         <!--                            <p class="card-text" th:text="${temporals.format(pizzaDetail.createdAt, 'dd/MM/yyyy')}"></p>-->
@@ -30,8 +30,8 @@
 
             </div>
             <div class="col-5">
-                <h2>Offerte Disponibili</h2>
-                <table>
+                <h3>Offerte Disponibili</h3>
+                <table class="my-5" th:if="${pizzaDetail.offerte.size() > 0}">
                     <thead>
                     <th>Nome Offerta</th>
                     <th>Inizio Offerta</th>
@@ -45,7 +45,10 @@
                     </tr>
                     </tbody>
                 </table>
-
+                <div class="alert alert-info my-5" th:unless="${pizzaDetail.offerte.size() > 0}">Non ci sono offerte
+                    disponibili per questa Pizza
+                </div>
+                <a class="btn btn-primary" th:href="@{/offerte/create}">Aggiungi Offerta</a>
                 <!--                <a class="btn btn-primary" th:href="@{/pizzas}">Torna al menu</a>-->
             </div>
         </div>
