@@ -9,6 +9,8 @@ import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pizzas")
@@ -32,6 +34,11 @@ public class Pizza {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    //Relazione con le offerte
+    //hibernate in automatico crea una tabella ponte se non stabiliamo che la relazione e'gia' stata mappata sull'entita offerta al campo "pizza" @ManyToOne @JoinColumn(nullable = false) private Pizza pizza;
+
+    @OneToMany(mappedBy = "pizza")
+    private List<Offerta> offerta = new ArrayList<>();
     //costruttore con parametri
 
 
@@ -114,6 +121,14 @@ public class Pizza {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<Offerta> getOfferta() {
+        return offerta;
+    }
+
+    public void setOfferta(List<Offerta> offerta) {
+        this.offerta = offerta;
     }
 
     // getter custom per il timestamp formattato

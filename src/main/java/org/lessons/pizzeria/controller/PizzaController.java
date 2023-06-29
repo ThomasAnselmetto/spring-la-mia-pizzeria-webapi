@@ -75,7 +75,7 @@ public class PizzaController {
 
     //post del browser con all'interno gli elementi scritti nel form'
     @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+    public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 //        i dati della pizza sono dentro all'oggetto' formPizza
 
 //        verifico se in validazione ci sono stati errori
@@ -88,6 +88,7 @@ public class PizzaController {
 
 //            save vuole un entita' come parametro il metodo fa un create sql se non trova la PK altrimenti fa update
             pizzaRepository.save(formPizza);
+            redirectAttributes.addFlashAttribute("message", "Pizza " + formPizza.getNome() + " creata");
             return "redirect:/pizzas";
         }
     }
@@ -101,13 +102,14 @@ public class PizzaController {
     }
 
     @PostMapping("/edit/{id}")
-    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         Pizza PizzatoEdit = getPizzaById(id); //fotografia della pizza pre-modifica
 //        trasferisco su formPizza tutti i dati che non sono presenti nel form(altrimenti li perdo)
         formPizza.setId(PizzatoEdit.getId());
         formPizza.setCreatedAt(PizzatoEdit.getCreatedAt());
 //        salvo i dati passando a pizzaRepo il formPizza completo
         pizzaRepository.save(formPizza);
+        redirectAttributes.addFlashAttribute("message", "Pizza " + PizzatoEdit.getNome() + " modificata");
         return "redirect:/pizzas";
 
     }

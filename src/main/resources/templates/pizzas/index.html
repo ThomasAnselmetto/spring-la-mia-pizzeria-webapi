@@ -49,8 +49,8 @@
                 <td th:text="| ${pizza.prezzo}|"></td>
                 <td th:text="${pizza.getFormattedDate()}"></td>
                 <td th:text="${pizza.getFormattedDate()}"></td>
-                <td>
-                    <button type="button" class="nome-link actions mb-3" th:href="@{|/pizzas/edit/${pizza.id}|}"><i class="fa-solid fa-pen-to-square"></i></button>
+                <td class="d-flex flex-column align-items-center justify-content-evenly azioni">
+                    <a class="nome-link actions " th:href="@{|/pizzas/edit/${pizza.id}|}"><i class="fa-solid fa-pen-to-square"></i></a>
                     <form th:action="@{|/pizzas/delete/${pizza.id}|}" method="POST">
                         <button type="submit" class="nome-link actions"><i class="fa-solid fa-trash-can"></i></button>
                     </form>

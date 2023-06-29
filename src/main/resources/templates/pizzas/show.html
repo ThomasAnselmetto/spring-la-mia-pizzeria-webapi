@@ -5,20 +5,44 @@
 </head>
 <body>
 
-<nav th:replace="~{/fragments/resources :: navbar(currentPage)}"
-     th:classappend="${currentPage == 'show' ? 'active' : '' }"></nav>
+<nav th:classappend="${currentPage == 'show' ? 'active' : '' }"
+     th:replace="~{/fragments/resources :: navbar(currentPage)}"></nav>
 <section class="show-section">
-    <div class="container">
-        <div class="row mt-5">
-            <div class="col-6 offset-3">
-                <div class="card colored-card">
-                    <img th:src="${pizzaDetail.FotoUrl}" class="card-img-top" th:alt="${pizzaDetail.nome}">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${pizzaDetail.nome}"></h5>
-                        <p class="card-text" th:text="${pizzaDetail.descrizione}"></p>
-                        <a th:href="@{/pizzas}" class="btn btn-primary">Torna al menu</a>
+    <div class="container colored-card" th:object="${pizzaDetail}">
+        <div class="row mt-5 justify-content-center align-items-center p-3">
+            <div class="col-7">
+
+                <div class="row">
+                    <div class="col-6">
+                        <img class="" th:alt="*{nome}" th:src="*{FotoUrl}">
+                    </div>
+                    <div class="col-6">
+                        <h2 class="" th:text="*{nome}"></h2>
+                        <h3>Descrizione</h3>
+                        <p class="fw-bold" th:text="*{descrizione}"></p>
+                        <h3>Ingredienti</h3>
+                        <p class="fw-bold" th:text="*{ingredienti}"></p>
+
+                        <a class="btn btn-primary" th:href="@{/pizzas}">Torna al menu</a>
+                        <!--                            <p class="card-text" th:text="${temporals.format(pizzaDetail.createdAt, 'dd/MM/yyyy')}"></p>-->
                     </div>
                 </div>
+
+            </div>
+            <div class="col-5">
+                <h2>Offerte Disponibili</h2>
+                <table>
+                    <thead>
+                    <th>Nome Offerta</th>
+                    <th>Inizio Offerta</th>
+                    <th>Termine Offerta</th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="offerta : ${pizza.offerte}"></tr>
+                    </tbody>
+                </table>
+
+                <!--                <a class="btn btn-primary" th:href="@{/pizzas}">Torna al menu</a>-->
             </div>
         </div>
     </div>
@@ -26,3 +50,6 @@
 
 </body>
 </html>
+
+
+<!--<div class="">-->
