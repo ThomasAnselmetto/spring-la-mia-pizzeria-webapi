@@ -38,7 +38,11 @@
                     <th>Termine Offerta</th>
                     </thead>
                     <tbody>
-                    <tr th:each="offerta : ${pizza.offerte}"></tr>
+                    <tr th:each="offerta : ${pizzaDetail.offerte}" th:object="${offerta}">
+                        <td th:text="*{nomeOfferta}"></td>
+                        <td th:text="*{#temporals.format(dataInizioOfferta, 'dd/MM/yyyy')}"></td>
+                        <td th:text="*{#temporals.format(dataFineOfferta, 'dd/MM/yyyy')}"></td>
+                    </tr>
                     </tbody>
                 </table>
 

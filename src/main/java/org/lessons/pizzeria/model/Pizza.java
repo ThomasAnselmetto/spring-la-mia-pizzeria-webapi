@@ -35,10 +35,10 @@ public class Pizza {
     private LocalDateTime updatedAt;
 
     //Relazione con le offerte
-    //hibernate in automatico crea una tabella ponte se non stabiliamo che la relazione e'gia' stata mappata sull'entita offerta al campo "pizza" @ManyToOne @JoinColumn(nullable = false) private Pizza pizza;
+    //hibernate in automatico crea una tabella ponte se non stabiliamo che la relazione e'gia' stata mappata sull'entita offerte al campo "pizza" @ManyToOne @JoinColumn(nullable = false) private Pizza pizza;
 
     @OneToMany(mappedBy = "pizza")
-    private List<Offerta> offerta = new ArrayList<>();
+    private List<Offerta> offerte = new ArrayList<>();
     //costruttore con parametri
 
 
@@ -123,12 +123,12 @@ public class Pizza {
         this.updatedAt = updatedAt;
     }
 
-    public List<Offerta> getOfferta() {
-        return offerta;
+    public List<Offerta> getOfferte() {
+        return offerte;
     }
 
-    public void setOfferta(List<Offerta> offerta) {
-        this.offerta = offerta;
+    public void setOfferte(List<Offerta> offerte) {
+        this.offerte = offerte;
     }
 
     // getter custom per il timestamp formattato
