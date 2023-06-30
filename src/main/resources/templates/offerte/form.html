@@ -5,8 +5,61 @@
 </head>
 <body>
 <nav th:replace="~{/fragments/resources :: navbar(currentPage = 'index')}"></nav>
-<div class="container">
-    <h1>form di creazione offerte</h1>
+<section class="create-section">
+    <h1 class="m-4" th:text="|Offerte ${offerta.pizza.nome}|"></h1>
+    <div class="container">
+
+        <form id="offerte-form"
+              method="post"
+                th:action="@{offerte/create}"
+              th:object="${offerta}"
+              class="row mt-5 fw-bold g-4">
+            <div class="col-6">
+<!--                inserisco campo hidden per passare anche la pizza nei campi sennò non ho l'id-->
+                <input type="hidden" th:field="*{pizza}">
+                <label for="nome-offerta" class="form-label">Nome Offerta</label>
+                <input type="text" th:errorClass="is-invalid" class="form-control" id="nome-offerta" name="nome-offerta" th:field="*{nomeOfferta}"
+                       placeholder="specifiche...">
+                <!--            vado a prendere gli errori specifici-->
+<!--                <div th:if="${#fields.hasErrors('nomeOfferta')}" class="invalid-feedback">-->
+<!--                    <ul>-->
+<!--                        <li th:each="err : ${#fields.errors('nomeOfferta')}" th:text="${err}"></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+            </div>
+            <div class="col-6">
+
+                <label for="inizio-offerta" class="form-label">Data Inizio Offerta</label>
+                <input type="date" th:errorClass="is-invalid" class="form-control" id="inizio-offerta" name="inizio-offerta" th:field="*{dataInizioOfferta}"
+                       placeholder="specifiche...">
+                <!--            vado a prendere gli errori specifici-->
+<!--                <div th:if="${#fields.hasErrors('dataInizioOfferta')}" class="invalid-feedback">-->
+<!--                    <ul>-->
+<!--                        <li th:each="err : ${#fields.errors('dataInizioOfferta')}" th:text="${err}"></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+            </div>
+            <div class="col-6">
+
+                <label for="fine-offerta" class="form-label">Data <Fine></Fine> Offerta</label>
+                <input type="date" th:errorClass="is-invalid" class="form-control" id="fine-offerta" name="fine-offerta" th:field="*{dataFineOfferta}"
+                       placeholder="specifiche...">
+                <!--            vado a prendere gli errori specifici-->
+<!--                <div th:if="${#fields.hasErrors('dataFineOfferta')}" class="invalid-feedback">-->
+<!--                    <ul>-->
+<!--                        <li th:each="err : ${#fields.errors('dataFineOfferta')}" th:text="${err}"></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+            </div>
+            <div class="col d-flex justify-content-end align-items-end">
+                <button type="submit" class="btn btn-primary">Inserisci un'offerta</button>
+                <a  class="btn btn-secondary ms-3" th:href="@{|/pizzas/${offerta.pizza.id}|}">Torna Indietro</a>
+            </div>
+        </form>
+    </div>
+
+</section>
 </div>
 </body>
 </html>
+

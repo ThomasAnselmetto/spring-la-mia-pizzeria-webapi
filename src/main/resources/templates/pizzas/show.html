@@ -17,7 +17,7 @@
                         <img class="" th:alt="*{nome}" th:src="*{FotoUrl}">
                     </div>
                     <div class="col-6">
-                        <h3 class="" th:text="*{nome}"></h3>
+                        <h3 class="mb-3" th:text="*{nome}"></h3>
                         <h5>Descrizione</h5>
                         <p class="" th:text="*{descrizione}"></p>
                         <h5>Ingredienti</h5>
@@ -48,8 +48,8 @@
                 <div class="alert alert-info my-5" th:unless="${pizzaDetail.offerte.size() > 0}">Non ci sono offerte
                     disponibili per questa Pizza
                 </div>
-                <a class="btn btn-primary" th:href="@{/offerte/create}">Aggiungi Offerta</a>
-                <!--                <a class="btn btn-primary" th:href="@{/pizzas}">Torna al menu</a>-->
+                <a class="btn btn-primary" th:href="@{/offerte/create(pizzaId=${pizzaDetail.id})}">Aggiungi Offerta</a>
+
             </div>
         </div>
     </div>
