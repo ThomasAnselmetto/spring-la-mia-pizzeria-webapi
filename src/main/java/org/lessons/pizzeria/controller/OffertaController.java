@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -42,8 +43,7 @@ public class OffertaController {
     }
 
     @PostMapping("/create")
-    public String doCreate(@Valid @ModelAttribute("offerta") Offerta formOfferta,//in modelattribute dico che spring mantenga assegnato al model e che l'attributo si chiama offerta
-                           BindingResult bindingResult) {
+    public String doCreate(@Valid @ModelAttribute("offerta") Offerta formOfferta, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         // valido
         if (bindingResult.hasErrors()) {
             // se ci sono errori ricreo il template del form
@@ -52,6 +52,45 @@ public class OffertaController {
         // se non ci sono errori salvo il borrowing
         offertaRepository.save(formOfferta);
         // faccio una redirect alla pagina di dettaglio del libro
+        redirectAttributes.addFlashAttribute("message", "Creata " + formOfferta.getNomeOfferta());
         return "redirect:/pizzas/" + formOfferta.getPizza().getId();
     }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+//        cerco l'offerta sul db'
+        Optional<Offerta> offerta = offertaRepository.findById(id);
+        if (offerta.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("offerta", offerta.get());
+        return "/offerte/form";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String toEdit(@PathVariable Integer id, @Valid @ModelAttribute("offerta") Offerta formOfferta, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        Optional<Offerta> offertaToEdit = offertaRepository.findById(id);
+        if (offertaToEdit.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+//            setto l'id al mio formOfferta'
+        formOfferta.setId(id);
+//            salvo l'offerta su DB update'
+        offertaRepository.save(formOfferta);
+//            faccio un redirect passando i dati del form al dettaglio tramite getpizza.getid
+        redirectAttributes.addFlashAttribute("message", "Modificata " + formOfferta.getNomeOfferta());
+        return "redirect:/pizzas/" + formOfferta.getPizza().getId();
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        Optional<Offerta> offertaToDelete = offertaRepository.findById(id);
+        if (offertaToDelete.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        offertaRepository.delete(offertaToDelete.get());
+        redirectAttributes.addFlashAttribute("message", "Cancellata " + offertaToDelete.get().getNomeOfferta());
+        return "redirect:/pizzas/" + offertaToDelete.get().getPizza().getId();
+    }
 }
+

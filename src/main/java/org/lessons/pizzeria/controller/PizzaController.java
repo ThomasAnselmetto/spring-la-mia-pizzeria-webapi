@@ -94,7 +94,7 @@ public class PizzaController {
     }
 
     //UPDATE
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
         Pizza pizzaById = getPizzaById(id);
         model.addAttribute("pizza", pizzaById);

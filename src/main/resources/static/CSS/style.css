@@ -1,7 +1,6 @@
 .colored-card{
-
-background: rgb(249,249,252);
-background: linear-gradient(0deg, rgba(249,249,252,1) 0%, rgba(231,231,231,1) 35%, rgba(203,203,203,1) 100%);
+border:1px solid black;
+background: white;
 }
 img{
 max-width:100%;
@@ -58,6 +57,10 @@ background-color: transparent;
 }
 .azioni{
 height:170px;
-border-bottom-color:transparent;
+
+border-left-color:transparent;
+}
+.azioni1{
+
 border-left-color:transparent;
 }

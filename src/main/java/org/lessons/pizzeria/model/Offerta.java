@@ -1,6 +1,7 @@
 package org.lessons.pizzeria.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
@@ -14,11 +15,13 @@ public class Offerta {
     private Integer id;
 
     //    una data di inizio
+
     private LocalDate dataInizioOfferta;
 
     //    una data di fine
     private LocalDate dataFineOfferta;
     //    un titolo
+    @NotNull
     private String nomeOfferta;
 
     @ManyToOne
