@@ -20,7 +20,7 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> ruoli;
 
     //    GETTERS E SETTERS

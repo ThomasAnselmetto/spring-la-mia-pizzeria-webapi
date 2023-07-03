@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">">
 <head>
 
     <th:block th:replace="~{/fragments/resources :: head(pageTitle='Pizzas Menu')}"></th:block>
@@ -7,15 +9,15 @@
 </head>
 <body>
 <nav th:replace="~{/fragments/resources :: navbar(currentPage = 'index')}" ></nav>
-<div  th:replace="~{/fragments/resources :: messages}"></div>
 <section class="index-section">
+    <div  th:replace="~{/fragments/resources :: messages}"></div>
 
     <div class="container">
         <h1 class="mt-4">Le nostre pizze</h1>
         </hr>
         <!--   link per la create-->
         <div class="d-flex align-items-center justify-content-between">
-            <a class="btn btn-primary" th:href="@{/pizzas/create}">Aggiungi Pizza</a>
+            <a  class="btn btn-primary" th:href="@{/pizzas/create}" sec:authorize="hasAuthority('ADMIN')">Aggiungi Pizza</a>
             <form th:action="@{/pizzas}" method="GET">
                 <div class="mb-3">
                     <label for="keyword" class="form-label">Cerca Pizza</label>
@@ -33,7 +35,7 @@
                 <th>Nome</th>
                 <th>Descrizione</th>
                 <th>Ingredienti</th>
-                <th>Foto</th>
+                <th class="d-none d-md-block">Foto</th>
                 <th>Prezzo €</th>
                 <th>Data Creazione</th>
                 <th>Data di Modifica</th>
@@ -45,7 +47,7 @@
                 <td><a class="nome-link" th:href="@{|/pizzas/${pizza.id}|}">[[${pizza.nome}]]</a></td>
                 <td th:text="${pizza.descrizione}"></td>
                 <td th:text="${pizza.ingredienti}"></td>
-                <td><img class="table-img" th:src="${pizza.fotoUrl}" th:alt="${pizza.nome}"></td>
+                <td><img class="table-img d-none d-md-block w-0" th:src="${pizza.fotoUrl}" th:alt="${pizza.nome}"></td>
                 <td th:text="| ${pizza.prezzo}|"></td>
                 <td th:text="${pizza.getFormattedDate()}"></td>
                 <td th:text="${pizza.getFormattedDate()}"></td>

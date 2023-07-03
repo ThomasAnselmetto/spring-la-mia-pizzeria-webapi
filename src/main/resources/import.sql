@@ -13,7 +13,10 @@ INSERT INTO `ruoli`(`id`, `name`) VALUES (2,'USER');
 
 INSERT INTO `utenti` (`id`,`first_name`, `last_name`, `email`, `password`) VALUES (1,'gionny','gionny','gionny@gionny.com','{noop}gionny');
 INSERT INTO `utenti` (`id`,`first_name`, `last_name`, `email`, `password`) VALUES (2,'gionny','secondo','galletto55@gionny.com','{noop}gallo');
-
+INSERT INTO `utenti` (`id`,`first_name`, `last_name`, `email`, `password`) VALUES (3,'gionny','terzo','mariottide@gionny.com','{noop}blabla');
+INSERT INTO `utenti` (`id`,`first_name`, `last_name`, `email`, `password`) VALUES (4,'gionny','quarto','ballerina@gionny.com','{noop}blublu');
 
 INSERT INTO `utenti_ruoli`(`user_id`, `ruoli_id`) VALUES (1,1)
 INSERT INTO `utenti_ruoli`(`user_id`, `ruoli_id`) VALUES (2,2)
+INSERT INTO `utenti_ruoli`(`user_id`, `ruoli_id`) VALUES (3,2)
+INSERT INTO `utenti_ruoli`(`user_id`, `ruoli_id`) VALUES (4,2)
