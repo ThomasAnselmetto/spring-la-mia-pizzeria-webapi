@@ -44,10 +44,13 @@ public class SecurityConfiguration {
                 .requestMatchers("/pizzas/create").hasAuthority("ADMIN")
                 .requestMatchers("/pizzas/**").hasAnyAuthority("ADMIN", "USER")
                 .requestMatchers("/offerte/**").hasAuthority("ADMIN")
-                .requestMatchers(HttpMethod.POST).hasAuthority("ADMIN")
+//                per invocare tutti i methods e la facciamo limitata a/pizzas
+                .requestMatchers(HttpMethod.POST, "/pizzas/**").hasAuthority("ADMIN")
                 .requestMatchers("/**").permitAll()
                 .and().formLogin()
                 .and().logout();
+//        disabilitiamo csrf per poter invocare le API
+        http.csrf().disable();
         return http.build();
 
     }
