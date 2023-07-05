@@ -10,11 +10,15 @@
     <h1 class="m-4" th:text="${isEdit} ? 'Modifica ' + ${pizza.nome} : 'Crea Pizza'"></h1>
 
     <div class="container">
+<!--        se il form contiene fil si fa come laravel form enctype-->
         <form class="row mt-5 fw-bold g-4"
               id="pizza-form"
               th:action="${isEdit} ? '/pizzas/edit/' + ${pizza.id} : '/pizzas/create'"
               th:object="${pizza}"
-              method="POST" >
+              method="POST"
+              enctype="multipart/form-data"
+            >
+
             <!--            LA VOCE ALL'INTERNO DEI FIELDS DEVE ESSERE UGUALE AGLI ATTRIBUTI DEL MODEL-->
             <!--            nome-->
 
@@ -62,9 +66,13 @@
             <!--            fotoUrl-->
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="fotoUrl" class="form-label">Url Foto</label>
-                    <input type="text" th:errorClass="is-invalid" class="form-control" id="fotoUrl" name="fotoUrl" th:field="*{fotoUrl}"
-                           placeholder="specifiche...">
+
+                        <label for="cover" class="form-label">Url Immagine</label>
+                        <input th:errorClass="is-invalid" class="form-control" name="cover" type="file" id="cover"th:field="*{cover}">
+
+<!--     commento la vecchia foto               <label for="fotoUrl" class="form-label">Url Foto</label>-->
+<!--                    <input type="text" th:errorClass="is-invalid" class="form-control" id="fotoUrl" name="fotoUrl"  th:field="*{fotoUrl}"-->
+<!--                           placeholder="specifiche...">-->
                 </div>
                 <!--                vado a prendere gli errori specifici-->
                 <!--                <div th:if="${#fields.hasErrors('nome)}" class="invalid-feedback">-->

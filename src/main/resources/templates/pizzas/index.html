@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 
     <th:block th:replace="~{/fragments/resources :: head(pageTitle='Pizzas Menu')}"></th:block>
@@ -35,7 +35,7 @@
                 <th>Nome</th>
                 <th>Descrizione</th>
                 <th>Ingredienti</th>
-                <th class="d-none d-md-block">Foto</th>
+<!--                <th class="d-none d-md-block">Foto</th>-->
                 <th>Prezzo €</th>
                 <th>Data Creazione</th>
                 <th>Data di Modifica</th>
@@ -47,7 +47,7 @@
                 <td><a class="nome-link" th:href="@{|/pizzas/${pizza.id}|}">[[${pizza.nome}]]</a></td>
                 <td th:text="${pizza.descrizione}"></td>
                 <td th:text="${pizza.ingredienti}"></td>
-                <td><img class="table-img d-none d-md-block w-0" th:src="${pizza.fotoUrl}" th:alt="${pizza.nome}"></td>
+<!--                <td><img class="table-img d-none d-md-block w-0" th:src="${pizza.fotoUrl}" th:alt="${pizza.nome}"></td>-->
                 <td th:text="| ${pizza.prezzo}|"></td>
                 <td th:text="${pizza.getFormattedDate()}"></td>
                 <td th:text="${pizza.getFormattedDate()}"></td>

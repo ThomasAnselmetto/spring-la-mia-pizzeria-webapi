@@ -1,6 +1,7 @@
 package org.lessons.pizzeria.controller;
 
 import jakarta.validation.Valid;
+import org.lessons.pizzeria.dto.PizzaDto;
 import org.lessons.pizzeria.model.Pizza;
 import org.lessons.pizzeria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 @RequestMapping("/pizzas")
 public class PizzaController {
+    @Autowired
+    org.lessons.pizzeria.service.PizzaService pizzaService;
     @Autowired
     private PizzaRepository pizzaRepository;
 
@@ -68,26 +70,30 @@ public class PizzaController {
     //CREATE get del browser per mostrare il form
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("pizza", new Pizza());
+//        sostituisco Pizza con PizzaDto vuoto anch'esso
+        model.addAttribute("pizza", new PizzaDto());
 //        return "/pizzas/create"; //view di riferimento
         return "/pizzas/edit";
     }
 
     //post del browser con all'interno gli elementi scritti nel form'
-    @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    @PostMapping("/create")//sostituisco l'oggetto pizza come attributo di store con PizzaDto
+    public String store(@Valid @ModelAttribute("pizza") PizzaDto formPizza, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 //        i dati della pizza sono dentro all'oggetto' formPizza
-
+//    se non ci sono errori provo a creare la pizza
+        if (!bindingResult.hasErrors())
+            try {
+                pizzaService.create(formPizza);
+            } catch (RuntimeException e) {
+                throw new RuntimeException(e);
+            }
 //        verifico se in validazione ci sono stati errori
         if (bindingResult.hasErrors()) {
 //            se ci sono errori
-
+//
             return "/pizzas/edit";
         } else {
-            formPizza.setCreatedAt(LocalDateTime.now());
-
 //            save vuole un entita' come parametro il metodo fa un create sql se non trova la PK altrimenti fa update
-            pizzaRepository.save(formPizza);
             redirectAttributes.addFlashAttribute("message", "Pizza " + formPizza.getNome() + " creata");
             return "redirect:/pizzas";
         }

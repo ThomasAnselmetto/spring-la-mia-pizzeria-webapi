@@ -27,13 +27,18 @@ public class Pizza {
 
     private String descrizione;
     private String ingredienti;
-    private String fotoUrl;
+
     @DecimalMin(value = "0", message = "Il prezzo deve essere superiore a 0.0")
     @NotNull(message = "Il prezzo della pizza non puo' essere vuoto")
     @Column(nullable = false)
     private BigDecimal prezzo;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    @Lob
+//    dico al mio DB di riservare uno spazio per dei file byte[] di 16777215 16MB hibernate crea un cover di tipo mediumblob nel DB
+    @Column(length = 16777215)
+    private byte[] cover;
+
 
     //Relazione con le offerte
     //hibernate in automatico crea una tabella ponte se non stabiliamo che la relazione e'gia' stata mappata sull'entita offerte al campo "pizza" @ManyToOne @JoinColumn(nullable = false) private Pizza pizza;
@@ -44,12 +49,11 @@ public class Pizza {
     //costruttore con parametri
 
 
-    public Pizza(Integer id, String nome, String descrizione, String ingredienti, String fotoUrl, @NotNull(message = "Il prezzo della pizza non puo' essere vuoto") BigDecimal prezzo, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Pizza(Integer id, String nome, String descrizione, String ingredienti, @NotNull(message = "Il prezzo della pizza non puo' essere vuoto") BigDecimal prezzo, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.nome = nome;
         this.descrizione = descrizione;
         this.ingredienti = ingredienti;
-        this.fotoUrl = fotoUrl;
         this.prezzo = prezzo;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -93,13 +97,6 @@ public class Pizza {
         this.ingredienti = ingredienti;
     }
 
-    public String getFotoUrl() {
-        return fotoUrl;
-    }
-
-    public void setFotoUrl(String fotoUrl) {
-        this.fotoUrl = fotoUrl;
-    }
 
     public BigDecimal getPrezzo() {
         return prezzo;
@@ -131,6 +128,14 @@ public class Pizza {
 
     public void setOfferte(List<Offerta> offerte) {
         this.offerte = offerte;
+    }
+
+    public byte[] getCover() {
+        return cover;
+    }
+
+    public void setCover(byte[] cover) {
+        this.cover = cover;
     }
 
     // getter custom per il timestamp formattato
